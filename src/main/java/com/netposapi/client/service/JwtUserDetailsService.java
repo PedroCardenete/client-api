@@ -37,7 +37,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	
 	public Person save(JwtRequest personRequest) {
 		if(personRepository.existsByUserName(personRequest.getUsername())){
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Email inexistente em nossa base : " + personRequest.getUsername(),null);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Emai já existe em nossa base : " + personRequest.getUsername(),null);
 		}
 		Person newPerson = new Person();
 		newPerson.setUserName(personRequest.getUsername());

@@ -54,8 +54,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers(
+				"/person/search/**",
+				"/person/list",
 				"/person/authenticate",
-				"/person/save",
+				"/person/register",
 				"/v2/api-docs",
 				"/configuration/ui",
 				"/swagger-resources/**",

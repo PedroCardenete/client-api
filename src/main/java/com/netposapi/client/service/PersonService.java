@@ -1,5 +1,6 @@
 package com.netposapi.client.service;
 
+import java.util.List;
 import java.util.Optional;
 import com.netposapi.client.models.Person;
 import com.netposapi.client.models.request.JwtRequest;
@@ -22,9 +23,13 @@ public class PersonService implements PersonServiceImpl {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Optional<Person> getPerson(int id) {
-        Optional<Person> person = personRepository.findById(id);
-        return person;
+    public List<Person> list() {
+        return personRepository.findAll(); 
+    }
+
+    @Override
+    public List<Person> search(String key) {
+        return personRepository.findByUserNameStartingWith(key); 
     }
 
     @Override
