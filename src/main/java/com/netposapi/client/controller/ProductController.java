@@ -58,7 +58,7 @@ public class ProductController {
     return ResponseEntity.ok().body(ResponseCustomized.response("Success", product));
   }
 
-  @ApiOperation(value = "Atualiar Produto")
+  @ApiOperation(value = "Atualizar Produto")
   @PutMapping(value = "/put")
   public ResponseEntity<Object> put(@Valid @RequestBody Product productRequest) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

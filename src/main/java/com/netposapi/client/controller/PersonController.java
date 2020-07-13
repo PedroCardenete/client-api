@@ -92,7 +92,7 @@ public class PersonController {
   @GetMapping(value = "/list")
   public ResponseEntity<Object> list() {
     List<Person> person = personService.list();
-    return person.size() > 0 ? ResponseEntity.ok().body(ResponseCustomized.response("Success", person)) 
+    return person.size() > 0 ? ResponseEntity.ok().body(ResponseCustomized.response("Success", person))
         : ResponseEntity.badRequest().body("Não existe nenhum person cadastrado");
   }
 
@@ -100,7 +100,7 @@ public class PersonController {
   @GetMapping(value = "/search/{key}")
   public ResponseEntity<Object> search(@PathVariable String key) {
     List<Person> person = personService.search(key);
-    return person.size() > 0 ? ResponseEntity.ok().body(ResponseCustomized.response("Success", person))  
+    return person.size() > 0 ? ResponseEntity.ok().body(ResponseCustomized.response("Success", person))
         : ResponseEntity.badRequest().body("Não existe nenhum person cadastrado com esse parametro de pesquisa");
   }
 

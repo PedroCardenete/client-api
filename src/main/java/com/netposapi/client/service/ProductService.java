@@ -25,25 +25,25 @@ public class ProductService implements ProductServiceImpl {
 
     @Override
     public Product save(ProductRequest productRequest) {
-        if(!productRepository.existsByNameAndPersonId(productRequest.getName(), productRequest.getPersonId())){
-        Product product = new Product();
-        product.setName(productRequest.getName());
-        product.setPersonId(productRequest.getPersonId());
-        product.setPrice(productRequest.getPrice());
-        product.setStock(productRequest.getStock());
-        productRepository.save(product);
-        Stock stock = new Stock();
-        stock.setPersonId(product.getPersonId());
-        stock.setQuantity(product.getStock());
-        stockRepository.save(stock);
-        return product;
+        if (!productRepository.existsByNameAndPersonId(productRequest.getName(), productRequest.getPersonId())) {
+            Product product = new Product();
+            product.setName(productRequest.getName());
+            product.setPersonId(productRequest.getPersonId());
+            product.setPrice(productRequest.getPrice());
+            product.setStock(productRequest.getStock());
+            productRepository.save(product);
+            Stock stock = new Stock();
+            stock.setPersonId(product.getPersonId());
+            stock.setQuantity(product.getStock());
+            stockRepository.save(stock);
+            return product;
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Produto ja cadastrado", null);
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto ja cadastrado", null);
     }
 
     @Override
     public Product put(Product productRequest) {
-        if(productRepository.existsByIdAndPersonId(productRequest.getId(), productRequest.getPersonId())){ 
+        if (productRepository.existsByIdAndPersonId(productRequest.getId(), productRequest.getPersonId())) {
             Product product = productRepository.getOne(productRequest.getId());
             product.setName(productRequest.getName());
             product.setPersonId(productRequest.getPersonId());
@@ -51,8 +51,8 @@ public class ProductService implements ProductServiceImpl {
             productRepository.saveAndFlush(product);
             return product;
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Produto nao existente", null);
-         
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nao existente", null);
+
     }
 
     @Override
@@ -65,6 +65,4 @@ public class ProductService implements ProductServiceImpl {
         return productRepository.findByIdAndPersonId(id, personId);
     }
 
-
-    
 }

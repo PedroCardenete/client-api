@@ -10,9 +10,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PRODUCT")
 public class Product {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
@@ -23,7 +23,7 @@ public class Product {
 
     @Column
     private Double price;
-    
+
     @Column
     private Integer stock;
 
@@ -66,7 +66,6 @@ public class Product {
     public void setStock(Integer stock) {
         this.stock = stock;
     }
-
 
     public Product(Integer id, Integer personId, String name, Double price, Integer stock) {
         this.id = id;

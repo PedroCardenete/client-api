@@ -7,14 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.TypeAlias;
-
 @Entity
 @Table(name = "STOCK")
 public class Stock {
-        
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
@@ -56,5 +54,4 @@ public class Stock {
         this.quantity = quantity;
     }
 
-    
 }

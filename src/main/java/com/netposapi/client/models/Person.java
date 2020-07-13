@@ -7,14 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name="PERSON")
+@Table(name = "PERSON")
 public class Person {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "username")
@@ -22,10 +20,9 @@ public class Person {
 
     @Column
     private String password;
-    
+
     @Column
     private String roles;
-
 
     public Person(Integer id, String userName, String password, String roles) {
         this.id = id;
