@@ -49,7 +49,7 @@ public class PersonController {
   @Autowired
   private JwtUserDetailsService userDetailsService;
 
-  @ApiOperation(value = "Retorna Person Logado")
+  @ApiOperation(value = "Retorna Person logado")
   @GetMapping
   public ResponseEntity<Object> find() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -57,11 +57,11 @@ public class PersonController {
     return ResponseEntity.ok().body(person);
   }
 
-  @ApiOperation(value = "Retorna Person Logado")
+  @ApiOperation(value = "Registrar um Person")
   @PostMapping(value = "/register")
   public ResponseEntity<Object> find(@Valid @RequestBody JwtRequest personRequest) {
     Person person = userDetailsService.save(personRequest);
-    return ResponseEntity.ok().body(ResponseCustomized.response("Sucess", person));
+    return ResponseEntity.ok().body(ResponseCustomized.response("Success", person));
   }
 
   @ApiOperation(value = "Autenticação Person")
@@ -92,15 +92,15 @@ public class PersonController {
   @GetMapping(value = "/list")
   public ResponseEntity<Object> list() {
     List<Person> person = personService.list();
-    return person.size() > 0 ? ResponseEntity.ok().body(ResponseCustomized.response("Sucess", person)) 
+    return person.size() > 0 ? ResponseEntity.ok().body(ResponseCustomized.response("Success", person)) 
         : ResponseEntity.badRequest().body("Não existe nenhum person cadastrado");
   }
 
-  @ApiOperation(value = "Listar Person")
+  @ApiOperation(value = "Pesquisar um Person ( Começa buscar pela string passa no parametro 'Exemplo%')")
   @GetMapping(value = "/search/{key}")
   public ResponseEntity<Object> search(@PathVariable String key) {
     List<Person> person = personService.search(key);
-    return person.size() > 0 ? ResponseEntity.ok().body(ResponseCustomized.response("Sucess", person))  
+    return person.size() > 0 ? ResponseEntity.ok().body(ResponseCustomized.response("Success", person))  
         : ResponseEntity.badRequest().body("Não existe nenhum person cadastrado com esse parametro de pesquisa");
   }
 
