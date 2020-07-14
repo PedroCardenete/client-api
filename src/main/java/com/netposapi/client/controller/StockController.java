@@ -3,7 +3,6 @@ package com.netposapi.client.controller;
 import java.util.Optional;
 
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 import com.netposapi.client.models.Person;
 import com.netposapi.client.models.Product;
@@ -49,7 +48,7 @@ public class StockController {
         
     @ApiOperation(value = "Movimentar o estoque valor positvo ou negativo")
     @PostMapping(value = "/movement/{id}/quantity/{quantity}")
-    public ResponseEntity<Object> find( @PathVariable ("id") Integer productId, @PathVariable ("quantity") @Min(1) @Max(1000)Integer quantity) {
+    public ResponseEntity<Object> find( @PathVariable ("id") Integer productId, @PathVariable ("quantity")  @Max(1000)Integer quantity) {
       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
       Optional<Person> person = personService.getPersonEmail(authentication.getName());
       Optional<Product> productStock = stockService.movementStock(person.get().getId(), productId, quantity);

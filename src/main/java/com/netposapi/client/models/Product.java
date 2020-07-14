@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -24,6 +27,9 @@ public class Product {
     @Column
     private Double price;
 
+    @Max(1000)
+    @PositiveOrZero(message = "O stock nao pode ser negativo")
+    @NotNull(message = "O stock nao pode ser nulo")
     @Column
     private Integer stock;
 

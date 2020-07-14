@@ -1,23 +1,23 @@
 package com.netposapi.client.models.request;
 
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 public class ProductRequest {
 
-    @NotEmpty
+    @NotNull
     private Integer personId;
 
-    @NotEmpty
+    @NotNull
     private String name;
 
-    @NotEmpty
+    @NotNull
     private Double price;
 
-    @Min(0)
     @Max(1000)
-    @NotEmpty
+    @PositiveOrZero(message = "O stock nao pode ser negativo")
+    @NotNull(message = "O stock nao pode ser nulo")
     private Integer stock;
 
     public Integer getPersonId() {
