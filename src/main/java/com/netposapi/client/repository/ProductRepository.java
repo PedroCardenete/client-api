@@ -1,6 +1,7 @@
 package com.netposapi.client.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.netposapi.client.models.Product;
 
@@ -16,5 +17,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findByPersonId(Integer personId);
 
-    List<Product> findByIdAndPersonId(Integer id, Integer personId);
+    Optional<Product> findByIdAndPersonId(Integer id, Integer personId);
 }

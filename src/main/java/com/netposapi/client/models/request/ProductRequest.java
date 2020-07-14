@@ -1,4 +1,7 @@
 package com.netposapi.client.models.request;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 public class ProductRequest {
@@ -11,7 +14,9 @@ public class ProductRequest {
 
     @NotEmpty
     private Double price;
-    
+
+    @Min(0)
+    @Max(1000)
     @NotEmpty
     private Integer stock;
 
@@ -56,5 +61,5 @@ public class ProductRequest {
 
     public ProductRequest() {
     }
-    
+
 }

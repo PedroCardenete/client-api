@@ -19,7 +19,11 @@ public class Stock {
     private Integer personId;
 
     @Column
+    private Integer productId;
+
+    @Column
     private Integer quantity;
+
 
     public Integer getId() {
         return this.id;
@@ -37,6 +41,14 @@ public class Stock {
         this.personId = personId;
     }
 
+    public Integer getProductId() {
+        return this.productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
     public Integer getQuantity() {
         return this.quantity;
     }
@@ -45,13 +57,14 @@ public class Stock {
         this.quantity = quantity;
     }
 
-    public Stock() {
-    }
-
-    public Stock(Integer id, Integer personId, Integer quantity) {
+    public Stock(Integer id, Integer personId, Integer productId, Integer quantity) {
         this.id = id;
         this.personId = personId;
+        this.productId = productId;
         this.quantity = quantity;
+    }
+
+    public Stock() {
     }
 
 }

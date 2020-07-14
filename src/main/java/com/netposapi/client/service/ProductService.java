@@ -1,6 +1,7 @@
 package com.netposapi.client.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.netposapi.client.models.Product;
 import com.netposapi.client.models.Stock;
@@ -33,6 +34,7 @@ public class ProductService implements ProductServiceImpl {
             product.setStock(productRequest.getStock());
             productRepository.save(product);
             Stock stock = new Stock();
+            stock.setProductId(product.getId());
             stock.setPersonId(product.getPersonId());
             stock.setQuantity(product.getStock());
             stockRepository.save(stock);
@@ -41,7 +43,7 @@ public class ProductService implements ProductServiceImpl {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto ja cadastrado", null);
     }
 
-    @Override
+    @Override //TODO: verificar o erro 500 que está apresentando
     public Product put(Product productRequest) {
         if (productRepository.existsByIdAndPersonId(productRequest.getId(), productRequest.getPersonId())) {
             Product product = productRepository.getOne(productRequest.getId());
@@ -61,8 +63,12 @@ public class ProductService implements ProductServiceImpl {
     }
 
     @Override
-    public List<Product> search(Integer id, Integer personId) {
+    public Optional<Product> search(Integer id, Integer personId) {
+        if (productRepository.existsByIdAndPersonId(id, personId)) {
         return productRepository.findByIdAndPersonId(id, personId);
     }
+
+    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto ja cadastrado", null);
+}
 
 }

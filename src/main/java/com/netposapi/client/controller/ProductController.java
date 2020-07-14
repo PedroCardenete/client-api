@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,18 +40,18 @@ public class ProductController {
   ProductService productService;
 
   @ApiOperation(value = "Retorna um produto especifico do Person logado")
-  @GetMapping(value = "{id}")
+  @GetMapping(value = "/{id}")
   public ResponseEntity<Object> find(@PathVariable int id) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     Optional<Person> person = personService.getPersonEmail(authentication.getName());
-    List<Product> product = productService.search(person.get().getId(), id);
-    return product.size() > 0 ? ResponseEntity.ok().body(ResponseCustomized.response("Success", product))
+    Optional<Product> product = productService.search(person.get().getId(), id);
+    return product.isPresent() ? ResponseEntity.ok().body(ResponseCustomized.response("Success", product))
         : ResponseEntity.badRequest().body("Não existe nenhum produto cadastrado");
   }
 
   @ApiOperation(value = "Registrar Produto")
   @PostMapping(value = "/register")
-  public ResponseEntity<Object> register(@Valid @RequestBody ProductRequest productRequest) {
+  public ResponseEntity<Object> register(@Valid  @RequestBody ProductRequest productRequest) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     Optional<Person> person = personService.getPersonEmail(authentication.getName());
     productRequest.setPersonId(person.get().getId());
